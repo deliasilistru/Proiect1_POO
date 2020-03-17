@@ -3,17 +3,17 @@
 
 using namespace std;
 
-mat_com::mat_com(int x, int l, int c) //constructorul de initializare a matricei
+mat_com::mat_com(int x, int l, int c) 
 {
     nrl=l;
     nrc=c;
     matrice=new numar_complex*[nrl];
     for(int i=0; i<nrl; i++)
-        matrice[i]=new numar_complex[nrc]; //alocam dinamic matricea
+        matrice[i]=new numar_complex[nrc]; 
 
     for(int i=0; i<nrl; i++)
         for(int j=0; j<nrc; j++)
-            matrice[i][j]=x; //initializam toate elementele cu valoarea x
+            matrice[i][j]=x; 
 }
 
 mat_com::mat_com(const mat_com& m)
@@ -24,7 +24,7 @@ mat_com::mat_com(const mat_com& m)
         nrc=m.nrc;
         matrice=new numar_complex*[nrl];
         for(int i=0; i<nrl; i++)
-            matrice[i]=new numar_complex[nrc]; //alocam memoria si apoi copiem pe rand fiecare element dintr o matrice in cealalta
+            matrice[i]=new numar_complex[nrc];  
 
         for(int i=0; i<nrl; i++)
             for(int j=0; j<nrc; j++)
@@ -59,17 +59,16 @@ eticheta:
 
     if(m.nrl<1 || m.nrc<1)
     {
-        cout<<endl<<"INTRODUCETI VALORI CEL PUTIN EGALE CU 1!!!"<<endl; //Daca utilizatorul introduce valori negatiive pentru
-        goto eticheta;          //nr de linii sau coloane, il punem sa reintroduca valorile. Cea mai eleganta solutie mi s-a
-    }                           //parut goto. Astept solutii noi pentru a rezolva altfel probleme de genul
-
+        cout<<endl<<"INTRODUCETI VALORI CEL PUTIN EGALE CU 1!!!"<<endl; 
+        goto eticheta;          
+    }                           
     m.matrice=new numar_complex*[m.nrl];
     for(int i=0; i<m.nrl; i++)
         m.matrice[i]=new numar_complex[m.nrc];
 
     for(int i=0; i<m.nrl; i++)
         for(int j=0; j<m.nrc; j++)
-            in>>m.matrice[i][j]; //memorarea elementelor matricei
+            in>>m.matrice[i][j]; 
 
     return in;
 }
@@ -81,25 +80,25 @@ mat_com& mat_com::operator =(const mat_com& rez)
 
     for(int i=0; i<nrl; i++)
         delete [] matrice[i];
-    delete [] matrice; //stergem pentru a  realoca memoria
+    delete [] matrice; 
 
     this->nrl=rez.nrl;
-    this->nrc=rez.nrc; //introducem aceleasi valori pentru campurile de numar linii si numar coloane
+    this->nrc=rez.nrc; 
 
     matrice=new numar_complex*[nrl];
     for(int i=0; i<nrl; i++)
-        matrice[i]=new numar_complex[nrc]; //realocare de memorie
+        matrice[i]=new numar_complex[nrc]; 
 
 
     for(int i=0; i<nrl; i++)
         for(int j=0; j<nrc; j++)
-            matrice[i][j]=rez.matrice[i][j]; //copierea valorilor
+            matrice[i][j]=rez.matrice[i][j]; 
     return *this;
 }
 
 mat_com mat_com::operator+(const mat_com& m2)
 {
-    if(nrl!=m2.nrl || nrc!=m2.nrc) //Aceasta este conditia de incompatibilitate si se afiseaza mesajul corespunzator
+    if(nrl!=m2.nrl || nrc!=m2.nrc) 
     {
         cout<<"Matricele nu pot fi adunate!";
         cout<<"\nIgnorati matricea ce va fi afisata la suma!!\n";
@@ -108,15 +107,15 @@ mat_com mat_com::operator+(const mat_com& m2)
     mat_com rez(*this);
     for(int i=0; i<nrl; i++)
         for(int j=0; j<nrc; j++)
-            rez.matrice[i][j]=matrice[i][j]+m2.matrice[i][j]; //adaugarea sumei dintre 2 elemente de pe aceleasi pozitii pe aceeasi pozitie
-    return rez;                                               //din matricea complexa rez
+            rez.matrice[i][j]=matrice[i][j]+m2.matrice[i][j]; 
+    return rez;                                              
 
 
 }
 
 mat_com mat_com::operator*(const mat_com& m2)
 {
-    if(nrc!=m2.nrl) //Aceasta este conditia de incompatibilitate si se afiseaza mesajul corespunzator
+    if(nrc!=m2.nrl) 
     {
         cout<<"Cele doua matrice nu se pot inmulti!\n";
         cout<<"Ganditi-va la o alta matrice care sa fie inmultita cu:\n";
@@ -124,9 +123,7 @@ mat_com mat_com::operator*(const mat_com& m2)
 
         return *this;
     }
-//1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 //acestea sunt niste valori pentru teste, pe care le iau cu copy paste
-//2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-//3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+
     mat_com rez(0,nrl,m2.nrc),that(*this);
 
     const numar_complex aux(0,0);
@@ -135,12 +132,12 @@ mat_com mat_com::operator*(const mat_com& m2)
     {
         for( j=0; j<m2.nrc; j++)
         {
-            rez.matrice[i][j]=aux; //se initializeaza cu 0 fiecare pozitie din rez (a doua oara pentru a fi siguri)
+            rez.matrice[i][j]=aux; 
             that=*this;
             for( k=0; k<m2.nrl; k++)
             {
-                rez.matrice[i][j]= rez.matrice[i][j] + that.matrice[i][k]*m2.matrice[k][j]; //aici se face suma dintre produse pentru a completa
-            }                                                                               //in matricea rez
+                rez.matrice[i][j]= rez.matrice[i][j] + that.matrice[i][k]*m2.matrice[k][j]; 
+            }                                                                               
         }
     }
 
