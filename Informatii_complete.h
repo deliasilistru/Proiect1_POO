@@ -22,4 +22,4 @@ public:
 
 };
 
-#endif // INFORMATII_COMPLETE_H_INCLUDED
+#endif 
