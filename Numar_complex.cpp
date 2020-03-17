@@ -56,8 +56,6 @@ istream& operator>>(istream& in, numar_complex& nr)
     double a,b;
     cout<<"Introduceti partea reala si cea imaginara: ";
     in>>a>>b;
-    //cout<<endl<<"Introduceti partea imaginara: ";
-    //in>>b;
     cout<<endl;
 
     nr.real=a;
@@ -83,10 +81,10 @@ numar_complex numar_complex::operator+(const numar_complex& el)
 
 numar_complex numar_complex::operator*(const numar_complex& el)
 {
-    //double re=real;
+    
     numar_complex rez;
-    rez.real=real*el.real-imag*el.imag; //din produsul partilor reale se scade produsul partilor imaginare
-    rez.imag=real*el.imag+imag*el.real;//partea reala a unui se inmulteste cu cea imaginara a celuilalt si apoi se aduna cu produsul anterior, facut invers
+    rez.real=real*el.real-imag*el.imag; 
+    rez.imag=real*el.imag+imag*el.real;
     return rez;
 }
 
