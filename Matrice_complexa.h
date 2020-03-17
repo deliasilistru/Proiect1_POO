@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class mat_com  //clasa mat_com reprezinta clasa matrice complexa
+class mat_com  
 {
 
 private:
@@ -20,13 +20,13 @@ public:
 
     friend ostream& operator<<(ostream&, mat_com&);
     friend istream& operator>>(istream&, mat_com&);
-    //friend class numar_complex;
+    
 
-    mat_com operator +(const mat_com&);//mat_com suma(mat_com);
+    mat_com operator +(const mat_com&);
     mat_com operator *(const mat_com&);
     mat_com& operator =(const mat_com&);
 
 
 };
 
-#endif // MATRICE_COMPLEXA_H_INCLUDED
+#endif 
