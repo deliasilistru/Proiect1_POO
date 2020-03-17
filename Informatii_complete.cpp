@@ -2,7 +2,7 @@
 
 using namespace std;
 
-info::info(int a) //aceasta este o clasa pentru citirea, memorarea si afisarea matricelor. N repr nr de elemente, iar v este vectorul de obiecte
+info::info(int a) 
 {
     n=a;
     v=new mat_com[n];
